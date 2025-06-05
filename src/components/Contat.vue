@@ -1,93 +1,83 @@
-<script setup lang="ts">
-// Nenhuma lógica necessária por enquanto
-</script>
-
 <template>
   <div class="container">
     <div class="content-wrapper">
-      <div class="text-content">
+      <div class="textMain">
         <h1>Contate-nos</h1>
-        <p>Tem alguma dúvida? Envie-nos uma mensagem</p>
+        <p>Envie-nos um email para podermos conversar</p>
       </div>
 
-      <div class="box">
- 
-        <div class="info-box">
-          <div class="infos">
-            <h1>Informações de Contato</h1>
-            <p>Envie uma mensagem para retornarmos o contato</p>
-
-            <div class="info-item">
-              <img src="../assets/Img/phone.png" alt="Telefone" />
-              <span>+55 45 99843-1882</span>
-            </div>
-
-            <div class="info-item">
-              <img src="../assets/Img/Email.png" alt="Email" />
-              <span>QrConnect@gmail.com</span>
-            </div>
-
-            <div class="info-item">
-              <img src="../assets/Img/Local.png" alt="Localização" />
-              <span>Cascavel, Paraná</span>
-            </div>
-          </div>
+      <div class="form-wrapper">
+        <div class="left-panel">
+          <div class="circle circle-1"></div>
+          <div class="circle circle-2"></div>
         </div>
 
-        <div class="form-box">
-          <div class="row">
-            <input type="text" placeholder="Nome" class="input" />
-            <input type="text" placeholder="Sobrenome" class="input" />
-          </div>
+        <div class="form-container">
+          <form class="form" @submit.prevent="sendEmail" ref="formRef">
+            <div class="row double">
+              <input type="text" name="first_name" placeholder="Nome" required />
+              <input type="text" name="last_name" placeholder="Sobrenome" />
+            </div>
 
-          <div class="row single">
-            <input type="email" placeholder="Email" class="input" />
-          </div>
+            <div class="row single">
+              <input type="email" name="email" placeholder="Email" required />
+            </div>
 
-          <div class="row single">
-            <input type="tel" placeholder="Numero de Telefone" class="input" />
-          </div>
+            <div class="row single">
+              <input type="tel" name="phone" placeholder="Telefone"/>
+            </div>
 
-          <div class="row single">
-            <label class="subject-label">Escreva sua mensagem</label>
-           
-          </div>
+            <div class="row single">
+            </div>
 
-          <div class="row single">
-            <textarea placeholder="Digite aqui..." class="textarea"></textarea>
-          </div>
+            <div class="row single">
+              <label class="label">Message</label>
+              <textarea name="message" placeholder="Escreva aqui.." required></textarea>
+            </div>
 
-          <div class="row single">
-            <button class="submit-btn">Send Message</button>
-          </div>
+            <div class="row single">
+              <button type="submit" class="submit-btn">Envie sua mensagem</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </template>
 
+<script setup>
+import { ref } from 'vue'
+import emailjs from '@emailjs/browser'
+
+const formRef = ref(null)
+
+const sendEmail = () => {
+  emailjs.sendForm(
+    'service_vuxqduc',     
+    'template_37q2pkk',    
+    formRef.value,
+    'LcK5_jMWJHgYvL7uM'     
+  ).then(
+    () => {
+      alert('Mensagem enviada com sucesso!')
+      formRef.value.reset()
+    },
+    (error) => {
+      alert('Erro ao enviar. Tente novamente.')
+      console.error(error.text)
+    }
+  )
+}
+</script>
+
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap');
-
-* {
-  box-sizing: border-box;
-}
-
-body, html {
-  margin: 0;
-  padding: 0;
-  background-color: #d4d4d4;
-  font-family: 'Roboto', sans-serif;
-}
-
 .container {
-  background-color: #1b1b1b;
+  background: #1a1a1a;
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 60px 20px;
-  color: #fff;
+  align-items: flex-start;
+  padding: 40px;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -95,154 +85,146 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  padding-top: 170px;
+  max-width: 1200px;
+}
+
+.textMain {
   text-align: center;
-}
-
-.text-content h1 {
-  font-size: 36px;
-  padding-left: 10px;
-  margin-bottom: 10px;
   color: white;
+  margin-bottom: 40px;
 }
 
-.text-content p {
+.textMain h1 {
+  font-size: 36px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+
+.textMain p {
   font-size: 18px;
-  color: #ccc;
-  margin-bottom: 30px;
+  margin-left: 20px;
+  color: #cccccc;
 }
 
-.box {
-  background-color: #000000;
+.form-wrapper {
+  display: flex;
   width: 100%;
   max-width: 1200px;
-  border-radius: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 30px;
-  gap: 20px;
-  justify-content: center;
-}
-
-.info-box {
-  background-color: #2a2a2a;
+  height: auto;
   border-radius: 10px;
-  padding: 20px;
-  color: #fff;
-  flex: 1 1 300px;
-  max-width: 400px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-.infos h1 {
-  margin-bottom: 10px;
-  font-size: 20px;
+.left-panel {
+  flex: 1;
+  background-color: #000;
+  position: relative;
+  min-height: 500px;
 }
 
-.infos p {
-  margin-bottom: 20px;
+.circle {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
 }
 
-.info-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-  gap: 10px;
+.circle-1 {
+  width: 120px;
+  height: 120px;
+  bottom: 40px;
+  left: 30px;
 }
 
-.info-item img {
-  width: 30px;
-  height: 30px;
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  bottom: 0;
+  left: 80px;
 }
 
-/* Formulário */
-.form-box {
-  flex: 2 1 400px;
+.form-container {
+  flex: 2;
+  background: #070707;
+  padding: 40px;
+}
+
+.form {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 20px;
-  background-color: #2f2f2f;
-  border-radius: 10px;
 }
 
 .row {
   display: flex;
-  gap: 15px;
+  gap: 20px;
+  justify-content: center;
+  
+}
+
+.row.double input {
+  flex: 1;
 }
 
 .row.single {
   flex-direction: column;
-  gap: 10px;
+  
 }
 
-.input, .textarea {
-  flex: 1;
+input,
+textarea {
+  width: 100%;
   padding: 12px;
-  font-size: 16px;
   border: none;
-  border-bottom: 1px solid #555;
+  border-bottom: 1px solid #ccc;
   background-color: transparent;
-  color: white;
+  color: #cccccca9; 
+  font-size: 16px;
 }
 
-.input::placeholder,
-.textarea::placeholder {
-  color: #aaa;
-  font-weight: 300;
+input::placeholder,
+textarea::placeholder {
+  color: #cccccca9; 
 }
 
-.textarea {
-  resize: vertical;
+textarea {
   min-height: 100px;
+  resize: vertical;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+.label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 14px;
 }
 
 .submit-btn {
-  padding: 14px 24px;
-  font-size: 16px;
-  background-color: #111;
+  background: #000;
   color: white;
-  border: 1px solid #444;
+  padding: 14px 24px;
+  border: none;
   border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-size: 16px;
+  align-self: flex-start;
 }
 
 .submit-btn:hover {
   background-color: #333;
 }
 
-.subject-label {
-  font-size: 14px;
-  color: #ccc;
-  margin-bottom: 5px;
-}
-
-.subject-options {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.subject-options label {
-  color: #ccc;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.subject-options input[type="radio"] {
-  accent-color: white;
-}
-
-/* Responsivo */
 @media (max-width: 768px) {
-  .box {
+  .form-wrapper {
     flex-direction: column;
-    align-items: center;
   }
 
-  .row {
-    flex-direction: column;
+  .left-panel {
+    height: 200px;
   }
 }
 </style>
