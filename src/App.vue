@@ -25,7 +25,9 @@ import Footer from './components/Footer.vue'
   </div>
 
   <Experience />
-  <Contat />
+  <div id="contact">
+     <Contat />
+  </div>
   <Footer />
 </template>
 

@@ -12,7 +12,7 @@
       <ul class="nav-links">
         <li><a href="#inicio" class="home">Início</a></li>
         <li><a href="#como-funciona" class="how-work">Como Funciona</a></li>
-        <li><a href="#contato" class="contact-us">Contate-nos</a></li>
+        <li><a href="#contact" class="contact-us">Contate-nos</a></li>
       </ul>
     </nav>
   </header>
@@ -79,13 +79,113 @@ a:hover {
 }
 
 .ImgTxt {
-    height: 220px;
-    position: absolute;
-    left: 30%;
-    top: -55%;
-}
-.Logo {
-    height: 110px;
+  height: 220px;
+  position: absolute;
+  left: 30%;
+  top: -55%;
 }
 
+.Logo {
+  height: 110px;
+}
+
+/* Responsividade */
+
+@media (max-width: 1440px) {
+  .ImgTxt {
+    height: 180px;
+    top: -47%;
+    left: 35%;
+  }
+  .Logo {
+    height: 100px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .ImgTxt {
+    height: 150px;
+    top: -45%;
+    left: 40%;
+  }
+  .Logo {
+    height: 85px;
+  }
+  .nav-links {
+    gap: 1.5rem;
+  }
+  a {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .ImgTxt {
+    height: 120px;
+    top: -40%;
+    left: 40%;
+  }
+  .Logo {
+    height: 70px;
+  }
+  .nav-links {
+    gap: 1.2rem;
+  }
+  a {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ImgTxt {
+    height: 100px;
+    top: -30%;
+    left: 20%;
+  }
+  .Logo {
+    height: 60px;
+  }
+  .nav-links {
+    gap: 1rem;
+  }
+  a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ImgTxt {
+    height: 90px;
+    top: -25%;
+    left: 18%;
+  }
+  .Logo {
+    height: 50px;
+  }
+  .nav-links {
+    flex-direction: column;
+    align-items: center;
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 0.7rem;
+  }
+  a {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 360px) {
+  .ImgTxt {
+    height: 70px;
+    top: -20%;
+    left: 16%;
+  }
+  .Logo {
+    height: 45px;
+  }
+  a {
+    font-size: 12px;
+  }
+}
 </style>

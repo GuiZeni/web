@@ -74,4 +74,37 @@
   
   font-family: 'Roboto', sans-serif;
 }
+
+
+
+@media (max-width: 1440px) {
+  .box {
+    width: 120vh;  
+    height: 60vh;  
+    padding: 1.5rem 2rem;
+  }
+
+  .app {
+    height: 290px; 
+    padding-left: 0;
+    left: 630px;
+    top: 120px;
+  }
+
+  .title {
+    font-size: 18px; 
+  }
+
+  .paragraph {
+    font-size: 1.1rem;
+  }
+
+  .text-content {
+    text-align: left;
+  }
+}
+
+
+
+
 </style>
